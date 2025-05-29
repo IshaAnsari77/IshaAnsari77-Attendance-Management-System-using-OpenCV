@@ -5,93 +5,101 @@ This repository contains the code and the steps for the implementation of attend
 
 The Attendance Management System is a Python-based application that uses OpenCV for face recognition to record attendance. This project simplifies the attendance tracking process by automating the task using facial recognition technology.
 
-## Contributors
+# 📸 Attendance Management System using OpenCV
 
--> KrishnaRaj
+This project is a **Face Recognition Attendance System** using **Python**, **OpenCV**, and **Streamlit**.  
+It uses your webcam to detect faces and mark attendance automatically.
 
-  Linkedin Handle: https://www.linkedin.com/in/krishnaraj-d-b156b5280/
-  
--> Lokesh Rahul
+---
 
-  Linkedin Handle: https://www.linkedin.com/in/lokesh-rahul-066ab7277
-  
--> Aakash
+## ✨ Features
 
-  Linkedin Handle: https://in.linkedin.com/in/aakash-p-631677272
-  
--> Vasantha Mukilan
+- Detects faces in real-time using a webcam  
+- Matches with stored student images  
+- Marks attendance only once per person  
+- Saves attendance in a CSV file  
+- Shows live video and name with green box  
+- Optional web app with Streamlit
 
-  Linkedin Handle: https://www.linkedin.com/in/vasanthamukilan-m-11644b279
-  
--> karthick
+---
 
-  Linkedin Handle: https://www.linkedin.com/in/karthick-prabakaran-8253211b6/
+## 🔧 Tools & Libraries Used
 
-## Features
+- Python  
+- OpenCV  
+- face_recognition  
+- NumPy  
+- Pandas  
+- Streamlit
 
-- Real-time face detection and recognition.
-- Store attendance data in a CSV file.
-- Cross-platform compatibility (Windows, macOS, Linux).
-- Easy setup and configuration.
+---
 
-## Getting Started
+## 📁 Folder Details
 
-### Prerequisites
-
-Before running the project, make sure you have the following dependencies installed:
-
-- Python 3.x
-- OpenCV
-- face_recognition
-- Numpy
-
-You can install Python dependencies using pip:
-
-```
-pip install opencv-python face_recognition numpy
-```
-
-### Usage:
-
-step 1 - Clone the repository to your local machine:
-```
-git clone https://github.com/Attendance-Management-System-Open-CV/Attendance-Management-System-using-OpenCV.git
-```
-step 2- Navigate to the project directory:
-```
-cd Attendance-Management-System-using-OpenCV
-```
-
-step 3 - Run the main script:
-
-```
-python3 main.py
-```
-
-### Output:
-
-#### scanning the face:
-![Screenshot 2023-09-10 133018](https://github.com/Attendance-Management-System-Open-CV/Attendance-Management-System-using-OpenCV/assets/72570119/5ffa2f5d-bd99-46ae-939f-49b3e761acc0)
-
-
-#### Updating the present students in an csv file:
-
-![Screenshot 2023-09-10 133334](https://github.com/Attendance-Management-System-Open-CV/Attendance-Management-System-using-OpenCV/assets/72570119/742ea06d-94b6-41e1-babf-d9d511b04722)
+project-folder/
+│
+├── student_images/ # Images of students
+├── Attendance.csv # Attendance file (output)
+├── main.py # Main Python file (OpenCV)
+├── app.py # Streamlit app (optional)
+├── README.md # Project info
+├── LICENSE # License
 
 
 
-### Contributing:
+## 🧠 How it Works
 
-We welcome contributions from the community! If you'd like to contribute to the project, please follow these steps:
+1. First, it reads all student images from the `student_images` folder.  
+2. Then it opens your webcam and starts scanning faces.  
+3. When it finds a face, it checks if it matches a student image.  
+4. If it matches, it shows the name on screen and saves the time and date in `Attendance.csv`.  
+5. It only saves one entry per person (no repeats).  
 
-  -> Fork the repository.
-  ->Create a new branch for your feature or bug fix.
-  ->Make your changes and commit them.
-  ->Push your changes to your fork.
-  ->Create a pull request to the main repository.
+---
+
+## 🚀 How to Run
+
+### Step 1: Clone this Project
+
+git clone https://github.com/IshaAnsari77/IshaAnsari77-Attendance-Management-System-using-OpenCV.git
+cd IshaAnsari77-Attendance-Management-System-using-OpenCV
+Step 2: Install Required Libraries
+
+pip install opencv-python face_recognition numpy pandas streamlit
+Step 3: Add Student Images
+Put your images in the student_images folder.
+Name the image file as the student’s name (e.g. isha.jpg).
+
+Step 4: Run the Project
+For normal OpenCV app:
+
+python main.py
+For Streamlit web version:
+
+streamlit run app.py
+![image](https://github.com/user-attachments/assets/388263ad-cc03-43cb-9950-e3c63bb7dfb9)
+![image](https://github.com/user-attachments/assets/3c42dae3-7451-4e85-a137-e0969a588ac6)
 
 
-  ### Thanks to the OpenCV and face_recognition communities for their valuable contributions.
-  ### Special thanks to our team members for their hard work and Nagaraj for mentoring us on this project.
+📷 Screenshot
+Here’s how it looks while running:
 
-Feel free to reach out to us with any questions or feedback. Happy coding!            :)
+
+✅ It shows a green box on the face
+✅ It displays the student name
+✅ Attendance gets saved instantly
+
+📄 Attendance Output File
+The data is saved in Attendance.csv like this:
+
+Name	Time	Date
+Isha ansari	07:48 PM	29-05-2025
+
+📘 License
+This project uses the MIT License.
+
+🙌 Created by Isha Ansari
+This project is for learning. You can improve it by adding more features. 😊
+
+
+
