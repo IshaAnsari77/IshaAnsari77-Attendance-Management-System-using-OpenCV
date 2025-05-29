@@ -32,20 +32,6 @@ It uses your webcam to detect faces and mark attendance automatically.
 - Pandas  
 - Streamlit
 
----
-
-## 📁 Folder Details
-
-project-folder/
-│
-├── student_images/ # Images of students
-├── Attendance.csv # Attendance file (output)
-├── main.py # Main Python file (OpenCV)
-├── app.py # Streamlit app (optional)
-├── README.md # Project info
-├── LICENSE # License
-
-
 
 ## 🧠 How it Works
 
@@ -63,14 +49,15 @@ project-folder/
 
 git clone https://github.com/IshaAnsari77/IshaAnsari77-Attendance-Management-System-using-OpenCV.git
 cd IshaAnsari77-Attendance-Management-System-using-OpenCV
-Step 2: Install Required Libraries
+-Step 2: Install Required Libraries
 
 pip install opencv-python face_recognition numpy pandas streamlit
-Step 3: Add Student Images
+
+-Step 3: Add Student Images
 Put your images in the student_images folder.
 Name the image file as the student’s name (e.g. isha.jpg).
 
-Step 4: Run the Project
+-Step 4: Run the Project
 For normal OpenCV app:
 
 python main.py
