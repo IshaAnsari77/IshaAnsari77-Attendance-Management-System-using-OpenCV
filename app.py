@@ -24,10 +24,17 @@ if st.button("📄 View Attendance Sheet"):
 if st.session_state['show_data']:
     if os.path.exists("Attendance.csv"):
         try:
-            df = pd.read_csv("Attendance.csv")
-            if "Name" not in df.columns:
-                # If no headers exist, add them
-                df = pd.read_csv("Attendance.csv", names=["Name", "Time", "Date", "Subject"], header=None)
+            # Read CSV, skipping bad lines
+            df = pd.read_csv("Attendance.csv", on_bad_lines='skip', header=None)
+
+            # Handle 3 or 4 column formats
+            if df.shape[1] == 3:
+                df.columns = ["Name", "Time", "Date"]
+            elif df.shape[1] == 4:
+                df.columns = ["Name", "Time", "Date", "Subject"]
+            else:
+                st.error("⚠️ The file has an unexpected number of columns. Please check the CSV format.")
+                st.stop()
 
             # Filter by date
             if "Date" in df.columns:

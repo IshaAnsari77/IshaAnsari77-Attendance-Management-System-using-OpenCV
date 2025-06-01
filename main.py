@@ -16,7 +16,7 @@ except FileNotFoundError:
     print(f"Error: Folder '{path}' not found.")
     exit()
 
-# Load each image and extract the student name
+# Load images and names
 for cl in mylist:
     curImg = cv2.imread(f'{path}/{cl}')
     if curImg is not None:
@@ -25,7 +25,7 @@ for cl in mylist:
     else:
         print(f"Warning: Couldn't read image {cl}")
 
-# Function to encode all known student faces
+# Encode known faces
 def findEncodings(images):
     encodeList = []
     for img in images:
@@ -34,27 +34,34 @@ def findEncodings(images):
         if encodings:
             encodeList.append(encodings[0])
         else:
-            print("Warning: No face found in an image.")
+            print("Warning: No face found in image.")
     return encodeList
 
-# Encode all known student images
 print("[INFO] Encoding student faces...")
 encoded_face_train = findEncodings(images)
 print("[INFO] Encoding completed.")
 
-# Function to mark attendance in CSV
+# Mark attendance function
 def markAttendance(name):
-    with open('Attendance.csv', 'a+') as f:
-        f.seek(0)
-        data = f.readlines()
-        nameList = [line.split(',')[0] for line in data]
+    filename = 'Attendance.csv'
+    now = datetime.now()
+    time = now.strftime('%I:%M:%S %p')
+    date = now.strftime('%d-%B-%Y')
 
-        if name not in nameList:
-            now = datetime.now()
-            time = now.strftime('%I:%M:%S %p')
-            date = now.strftime('%d-%B-%Y')
-            f.write(f'\n{name}, {time}, {date}')
-            print(f"[MARKED] {name} at {time} on {date}")
+    # Check existing entries
+    if os.path.exists(filename):
+        with open(filename, 'r') as f:
+            lines = f.readlines()
+            nameList = [line.strip().split(',')[0] for line in lines]
+    else:
+        nameList = []
+
+    if name not in nameList:
+        with open(filename, 'a') as f:
+            if os.stat(filename).st_size == 0:
+                f.write("Name,Time,Date\n")  # Write header if empty
+            f.write(f"{name},{time},{date}\n")
+        print(f"[MARKED] {name} at {time} on {date}")
 
 # Start webcam
 cap = cv2.VideoCapture(0)
@@ -80,7 +87,7 @@ while True:
         if matches[matchIndex]:
             name = classNames[matchIndex].capitalize()
             y1, x2, y2, x1 = faceloc
-            y1, x2, y2, x1 = y1 * 4, x2 * 4, y2 * 4, x1 * 4
+            y1, x2, y2, x1 = [i * 4 for i in [y1, x2, y2, x1]]
 
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
@@ -92,7 +99,6 @@ while True:
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# Cleanup
 cap.release()
 cv2.destroyAllWindows()
 print("[INFO] Attendance session ended.")
