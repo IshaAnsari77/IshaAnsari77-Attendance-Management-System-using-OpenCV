@@ -12,16 +12,22 @@ st.subheader("BCA - Rayat Bahra University")
 now = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 st.caption(f"🕒 Current Time: {now}")
 
-# View attendance sheet
+# Initialize session state
+if 'show_data' not in st.session_state:
+    st.session_state['show_data'] = False
+
+# Button to view attendance
 if st.button("📄 View Attendance Sheet"):
+    st.session_state['show_data'] = True
+
+# Load data if flag is set
+if st.session_state['show_data']:
     if os.path.exists("Attendance.csv"):
         try:
             df = pd.read_csv("Attendance.csv")
             if "Name" not in df.columns:
-                # Assume no header in CSV, manually assign columns
                 df = pd.read_csv("Attendance.csv", names=["Name", "Time", "Date", "Subject"], header=None)
 
-            # Unique students
             st.success(f"👥 Unique Students Marked: {df['Name'].nunique()}")
 
             # Filter by date
