@@ -26,9 +26,8 @@ if st.session_state['show_data']:
         try:
             df = pd.read_csv("Attendance.csv")
             if "Name" not in df.columns:
+                # If no headers exist, add them
                 df = pd.read_csv("Attendance.csv", names=["Name", "Time", "Date", "Subject"], header=None)
-
-            st.success(f"👥 Unique Students Marked: {df['Name'].nunique()}")
 
             # Filter by date
             if "Date" in df.columns:
@@ -38,8 +37,10 @@ if st.session_state['show_data']:
                 if selected_date != "All":
                     filtered_df = df[df["Date"] == selected_date]
                     st.write(f"Showing attendance for: **{selected_date}** ({len(filtered_df)} records)")
+                    st.success(f"👥 Unique Students Marked: {filtered_df['Name'].nunique()}")
                     st.dataframe(filtered_df)
                 else:
+                    st.success(f"👥 Unique Students Marked: {df['Name'].nunique()}")
                     st.dataframe(df)
             else:
                 st.dataframe(df)
